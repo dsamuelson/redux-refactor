@@ -6,12 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import store from './store'
 import { Provider } from 'react-redux'
 
-// console.log('initial state: ', store.getState())
-// const unsubscribe = store.subscribe(() => 
-//  console.log('State After dispatch: ', store.getState()))
-// store.dispatch({type: 'UPDATE_CURRENT_CATEGORY', currentCategory: '2'});
-// unsubscribe();
-
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
