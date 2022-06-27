@@ -38,7 +38,6 @@ function CategoryMenu() {
     });
   };
 
-  console.log(categories.length)
   return (
     <div>
       <h2>Choose a Category:</h2>
