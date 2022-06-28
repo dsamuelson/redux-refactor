@@ -4,9 +4,10 @@ import { pluralize } from "../../utils/helpers"
 import { idbPromise } from "../../utils/helpers";
 
 import store from "../../store";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 function ProductItem(item) {
+  const dispatch = useDispatch()
   const storeCart = useSelector(state => state.cart);
   const cart = storeCart.cart;
 
@@ -21,7 +22,7 @@ function ProductItem(item) {
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === _id)
     if (itemInCart) {
-      store.dispatch({
+      dispatch({
         type: 'UPDATE_CART_QUANTITY',
         _id: _id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
@@ -31,7 +32,7 @@ function ProductItem(item) {
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
       });
     } else {
-      store.dispatch({
+      dispatch({
         type: 'ADD_TO_CART',
         product: { ...item, purchaseQuantity: 1 }
       });

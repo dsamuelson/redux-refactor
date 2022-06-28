@@ -5,9 +5,10 @@ import { QUERY_PRODUCTS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 import store from '../../store';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 function ProductList() {
+  const dispatch = useDispatch()
   const storeCurrentCategory = useSelector(state => state.categories);
   const currentCategory = storeCurrentCategory.currentCategory;
 
@@ -18,7 +19,7 @@ function ProductList() {
 
   useEffect(() => {
     if (data) {
-      store.dispatch({
+      dispatch({
         type: 'UPDATE_PRODUCTS',
         products: data.products,
       });
@@ -27,13 +28,13 @@ function ProductList() {
       });
     } else if (!loading) {
       idbPromise('products', 'get').then((products) => {
-        store.dispatch({
+        dispatch({
           type: 'UPDATE_PRODUCTS',
           products: products,
         });
       });
     }
-  }, [data, loading]);
+  }, [data, loading, dispatch]);
 
   function filterProducts() {
     if (!currentCategory) {
